@@ -442,15 +442,15 @@ def resolver(metodo_busqueda, franceses, piratas):
 
     return resultado
     
-if __name__ == '__main__':
-
-    visor = WebViewer()
-    visor = BaseViewer()
+##if __name__ == '__main__':
+##
+##    visor = WebViewer()
+##    visor = BaseViewer()
 ##    visor = None
-    result = depth_first(Barcos_Piratas(INITIAL),viewer=visor, graph_search=True)
-    
-    print (result.state)
-    print (result.path())
-    print (len(result.path()))
-    print (result.cost)
-    print (visor.stats)
+##    result = depth_first(Barcos_Piratas(INITIAL),viewer=visor, graph_search=True)
+##    
+##    print (result.state)
+##    print (result.path())
+##    print (len(result.path()))
+##    print (result.cost)
+##    print (visor.stats)
