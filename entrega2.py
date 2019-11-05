@@ -230,12 +230,11 @@ def csp_conferencia():
     ##Y no se deben dar otras charlas en el mismo horario que esta.
     
     
-    problem = CspProblem(variables, domains, restricciones)
-    result = backtrack(problem, variable_heuristic=MOST_CONSTRAINED_VARIABLE, value_heuristic=LEAST_CONSTRAINING_VALUE, inference=True)
-    ##variable_heuristic=MOST_CONSTRAINED_VARIABLE, value_heuristic=LEAST_CONSTRAINING_VALUE, inference=True
-    ##result = min_conflicts(problem, iterations_limit=100)
-
-    return result
+    #problem = CspProblem(variables, domains, restricciones)
+    #result = backtrack(problem, variable_heuristic=MOST_CONSTRAINED_VARIABLE, value_heuristic=LEAST_CONSTRAINING_VALUE, inference=True)
+    #result = min_conflicts(problem, iterations_limit=100)
+    #Para pruebas sin "resolver" poner "result" en return
+    return CspProblem(variables, domains, restricciones)
 
 def resolver(metodo_busqueda, iteraciones):
     problema = csp_conferencia()
@@ -248,7 +247,7 @@ def resolver(metodo_busqueda, iteraciones):
         resultado = min_conflicts(problema, iterations_limit=iteraciones)
 
     return resultado
-##if __name__ == '__main__':
-##    
+
+##if __name__ == '__main__':    
 ##    result = csp_conferencia()
 ##    print(result)

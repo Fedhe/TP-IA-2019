@@ -34,9 +34,13 @@ class Barcos_Piratas(SearchProblem):
  
     def actions(self, state):
         listactions=[]
-
+        total = 0
         #Si no están todos hundidos hay acciones disponibles..
-        if not (state[0][0][4] == 1 and state[0][1][4] == 1 and state[0][2][4] == 1):
+        for barcos in state[0]:
+            if barcos[4] == 1:
+                total = total + 1
+        
+        if not total == len(state[0]):
             for barco in state[0]:
                 #Si está hundido no agrego ninguna accion
                 if barco[4] != 1:
@@ -395,32 +399,34 @@ class Barcos_Piratas(SearchProblem):
 
 def resolver(metodo_busqueda, franceses, piratas):
     viewer = None
-    #Le quiero agregar la LETRA/NOMBRE del barco al principio, y al final le agrego 0 y 0 (mapa y hundido)
-    #En "estado" paso primero los piratas y luego los franceses (como pensamos nosotros nuestro estado inicial) (Tira el mismo error pasando primero uno u otro)
     letra = 0
+    franceses = list(franceses)
+    piratas = list(piratas)
     for barcos in piratas:
-        barcos = list(barcos)
         if letra == 0:
-            barcos.insert(0, 'A')
-            barcos.append(0)
-            barcos.append(0)
-            barcos = tuple(barcos)
+            piratas[0] = list(piratas[0])
+            piratas[0].insert(0, 'A')
+            piratas[0].append(0)
+            piratas[0].append(0)
+            piratas[0] = tuple(piratas[0])
 
         if letra == 1:
-            barcos.insert(0, 'B')
-            barcos.append(0)
-            barcos.append(0)
-            barcos = tuple(barcos)
+            piratas[1] = list(piratas[1])
+            piratas[1].insert(0, 'B')
+            piratas[1].append(0)
+            piratas[1].append(0)
+            piratas[1] = tuple(piratas[1])
 
         if letra == 2:
-            barcos.insert(0, 'C')
-            barcos.append(0)
-            barcos.append(0)
-            barcos = tuple(barcos)
+            piratas[2] = list(piratas[2])
+            piratas[2].insert(0, 'C')
+            piratas[2].append(0)
+            piratas[2].append(0)
+            piratas[2] = tuple(piratas[2])
         letra = letra + 1
-    franceses = tuple(franceses)
-    estado = ((barcos, franceses))
-
+    
+    estado = ((tuple(piratas), tuple(franceses)))
+    
     problem = Barcos_Piratas(estado)
 
     if metodo_busqueda == "breadth_first":    
@@ -436,15 +442,15 @@ def resolver(metodo_busqueda, franceses, piratas):
 
     return resultado
     
-#if __name__ == '__main__':
-##    franceses = [(0,2), (0,3), (1,2), (1,3), (2,1), (2,2), (2,3), (3,0), (3,1), (3,2), (4,0), (4,1), (5,0)]
-##    piratas = [(4,4), (4,5), (5,4)]
-##    visor = WebViewer()
-##    visor = BaseViewer()
+if __name__ == '__main__':
+
+    visor = WebViewer()
+    visor = BaseViewer()
 ##    visor = None
-##    result = astar(Barcos_Piratas(INITIAL),viewer=visor, graph_search=True)
-##
-##    print (result.state)
-##    print (result.path())
-##    print (len(result.path()))
-##    print (visor.stats)
+    result = depth_first(Barcos_Piratas(INITIAL),viewer=visor, graph_search=True)
+    
+    print (result.state)
+    print (result.path())
+    print (len(result.path()))
+    print (result.cost)
+    print (visor.stats)
